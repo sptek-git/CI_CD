@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+
+    <!-- 사용자 CSS 추가 -->
+    <th:block layout:fragment="css">
+
+    </th:block>
+
+</head>
+
+
+
+<div layout:fragment="content" class="content mglr-20p">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <td>순번</td>
+            <td>내용</td>
+            <td>상세 이동</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="wiseSaying, status: ${pages.getContent()}">
+            <td th:text="${wiseSaying.id}"></td>
+            <td th:text="${wiseSaying.content}"></td>
+            <td><a th:href="@{'/wise/saying/' + ${wiseSaying.id}}">상세페이지 이동</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:replace="~{fragments/pagination::pagination}"></div>
+
+</div>
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+</th:block>
+
+</html>

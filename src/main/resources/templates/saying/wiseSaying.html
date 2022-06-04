@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <!-- 사용자 CSS 추가 -->
+    <th:block layout:fragment="css">
+
+    </th:block>
+
+</head>
+
+<div layout:fragment="content">
+
+    <form id="dataForm" style="text-align: center" class="mglr-20p mgtb-5p" th:object="${wiseSayingDto}">
+
+        <input type="hidden" th:field="*{id}">
+
+        <p class="global-tb-margin30 div_sub1">
+            사람들에게 도움이 되는 <span CLASS="orange">명언을</span> 입력해주세요
+        </p>
+
+        <div class="form-group">
+            <input th:field="*{person}"  type="text" class="form-control" placeholder="명언을 말한 사람을 입력해주세요">
+        </div>
+
+        <div class="form-group">
+            <textarea th:field="*{content}" class="form-control rounded-0" rows="5" placeholder="명언을 입력해주세요"></textarea>
+        </div>
+
+        <div class="form-group">
+            <textarea th:field="*{nativeContent}" class="form-control rounded-0" rows="5" placeholder="명언 원본을 입력해주세요"></textarea>
+        </div>
+
+        <div>
+            <button id="submit" class="btn btn-secondary rounded">저장</button>
+        </div>
+    </form>
+
+</div>
+
+
+<!-- 사용자 스크립트 추가 -->
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+        $("#submit").unbind("click").click(function(event){
+            event.preventDefault();
+            let formData = $("#dataForm").serialize();
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+
+            $.ajax({
+                cache : false,
+                url : "/wise/saying",
+                type : 'POST',
+                data : formData,
+                beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader(header, token);
+                },
+                success : function(data) {
+                    alert("저장되었습니다.");
+                },
+                error : function(xhr, status) {
+                    alert(xhr + " : " + status);
+                }
+            });
+        });
+    </script>
+
+</th:block>
+
+
+</html>

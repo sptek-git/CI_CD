@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="pagination">
+    <div th:with="start=${(pages.number/maxPage)*maxPage + 1}, end=(${(pages.totalPages == 0) ? 1 : (start + (maxPage - 1) < pages.totalPages ? start + (maxPage - 1) : pages.totalPages)})" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${pages.number eq 0}?'disabled':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${pages.number-1})}" aria-label='Previous' class="page-link">
+                    <span aria-hidden='true'>Previous</span>
+                </a>
+            </li>
+
+            <li class="page-item" th:each="curPage: ${#numbers.sequence(start, end)}" th:classappend="${pages.number eq page-1}?'active':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${curPage-1})}" th:inline="text" class="page-link">[[${curPage}]]</a>
+            </li>
+
+            <li class="page-item" th:classappend="${pages.number+1 ge pages.totalPages}?'disabled':''">
+                <a th:href="@{__${#httpServletRequest.requestURI}__(page=${pages.number+1})}" aria-label='Next' class="page-link">
+                    <span aria-hidden='true'>Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</html>

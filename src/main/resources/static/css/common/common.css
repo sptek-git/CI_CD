@@ -1,0 +1,71 @@
+/*
+ * container
+ */
+.global-tb-margin30{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*
+ * div
+ */
+.div_sub1{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.43;
+    letter-spacing: -0.88px;
+    color: rgb(30, 30, 33);
+    text-align: center;
+}
+
+
+/*
+ * background
+ */
+.bk-gray{
+    background: rgb(242, 244, 247)
+}
+
+
+/*
+ * font
+ */
+.fs-40{
+    font-size:40px;
+}
+
+.fs-orange{
+    color: rgb(248, 112, 4);
+}
+
+
+/*
+ * margin
+ */
+.mt-35{
+    margin-top: 35px;
+}
+.mb-20{
+    margin-bottom: 20px;
+}
+
+.mglr-20p{
+    margin-left:20%;
+    margin-right:20%;
+}
+
+.mgtb-5p{
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
+/*
+ * color
+ */
+.red{
+    color: #FF0000;
+}
+
+.orange{
+    color: #F87004;
+}
